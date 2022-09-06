@@ -91,6 +91,19 @@
     
     
     <entry>
+      <title>棋盘爆破</title>
+      <link href="/posts/0.html"/>
+      <url>/posts/0.html</url>
+      
+        <content type="html"><![CDATA[<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line"></span><br><span class="line">key = []</span><br><span class="line">cipher = <span class="string">&quot;ilnllliiikkninlekile&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> itertools.permutations(<span class="string">&#x27;ilnke&#x27;</span>, <span class="number">5</span>):</span><br><span class="line">    key.append(<span class="string">&#x27;&#x27;</span>.join(i))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> now_key <span class="keyword">in</span> key:</span><br><span class="line">    solve_c = <span class="string">&quot;&quot;</span></span><br><span class="line">    res = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">for</span> now_c <span class="keyword">in</span> cipher:</span><br><span class="line">        solve_c += <span class="built_in">str</span>(now_key.index(now_c))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(solve_c),<span class="number">2</span>):</span><br><span class="line">        now_ascii = <span class="built_in">int</span>(solve_c[i])*<span class="number">5</span>+<span class="built_in">int</span>(solve_c[i+<span class="number">1</span>])+<span class="number">97</span></span><br><span class="line">        <span class="keyword">if</span> now_ascii&gt;<span class="built_in">ord</span>(<span class="string">&#x27;i&#x27;</span>):</span><br><span class="line">            now_ascii+=<span class="number">1</span></span><br><span class="line">        res += <span class="built_in">chr</span>(now_ascii)</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;flag&quot;</span> <span class="keyword">in</span> res:</span><br><span class="line">        <span class="built_in">print</span> (now_key,res)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Hello Debu</title>
       <link href="/posts/59354.html"/>
       <url>/posts/59354.html</url>
@@ -104,17 +117,6 @@
     
   
   
-    
-    
-    <entry>
-      <title>comments</title>
-      <link href="/comments/index.html"/>
-      <url>/comments/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
     
     
     <entry>
@@ -133,16 +135,16 @@
       <link href="/about/index.html"/>
       <url>/about/index.html</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<p>目前是大二学生</p>]]></content>
       
     </entry>
     
     
     
     <entry>
-      <title>link</title>
-      <link href="/link/index.html"/>
-      <url>/link/index.html</url>
+      <title>comments</title>
+      <link href="/comments/index.html"/>
+      <url>/comments/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -154,6 +156,17 @@
       <title>tags</title>
       <link href="/tags/index.html"/>
       <url>/tags/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>link</title>
+      <link href="/link/index.html"/>
+      <url>/link/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
