@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zwsmphmzl.github.io/posts/1959fd48.html</loc>
+    
+    <lastmod>2022-09-08</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://zwsmphmzl.github.io/about/index.html</loc>
     
     <lastmod>2022-09-07</lastmod>
@@ -94,7 +103,7 @@
 
   <url>
     <loc>https://zwsmphmzl.github.io/</loc>
-    <lastmod>2022-09-07</lastmod>
+    <lastmod>2022-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -102,14 +111,28 @@
   
   <url>
     <loc>https://zwsmphmzl.github.io/tags/CRYPTO/</loc>
-    <lastmod>2022-09-07</lastmod>
+    <lastmod>2022-09-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://zwsmphmzl.github.io/tags/py%E8%84%9A%E6%9C%AC/</loc>
-    <lastmod>2022-09-07</lastmod>
+    <lastmod>2022-09-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://zwsmphmzl.github.io/tags/WEB/</loc>
+    <lastmod>2022-09-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://zwsmphmzl.github.io/tags/wp/</loc>
+    <lastmod>2022-09-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -118,14 +141,14 @@
   
   <url>
     <loc>https://zwsmphmzl.github.io/categories/CRYPTO/</loc>
-    <lastmod>2022-09-07</lastmod>
+    <lastmod>2022-09-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://zwsmphmzl.github.io/categories/CRYPTO/%E8%84%9A%E6%9C%AC%E7%88%86%E7%A0%B4/</loc>
-    <lastmod>2022-09-07</lastmod>
+    <lastmod>2022-09-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
