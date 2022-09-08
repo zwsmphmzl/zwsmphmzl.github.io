@@ -11,6 +11,14 @@
         <content type="html"><![CDATA[<p>题目是本地管理员，打开网址，f12看一下源码，发现有一行是base64编码，使用<a href="https://cyberchef.org/">工具</a>进行解码</p><p><img src="https://cdn.jsdelivr.net/gh/zwsmphmzl/Image/202209081221054.png" alt="1662568664177"><br><img src="https://cdn.jsdelivr.net/gh/zwsmphmzl/Image/202209081237295.png" alt="1662568697378"></p><p>出来是test123，猜测是密码，用户猜测为admin，输入进去结果不行</p><p>使用<strong>bp</strong>抓包试一下，然后再重新发送，提示ip禁止访问，因为题目是本地管理员</p><p><img src="https://cdn.jsdelivr.net/gh/zwsmphmzl/Image/202209081237381.png" alt="1662568792342"></p><p>用<strong>xff伪装ip</strong>，然后发送</p><p><img src="https://cdn.jsdelivr.net/gh/zwsmphmzl/Image/202209081237093.png" alt="1662568871879"></p><p>成功，返回flag</p><p><img src="https://cdn.jsdelivr.net/gh/zwsmphmzl/Image/202209081237381.png" alt="1662568897270"></p><p>总结：xff伪装ip</p><p><u>X-Forwarded-For:</u> </p><p>写个博客都是bug，图片也不显示，不如本地，效率太低了，设置应该有问题（跪</p>]]></content>
       
       
+      <categories>
+          
+          <category> WEB </category>
+          
+          <category> bugku </category>
+          
+      </categories>
+      
       
         <tags>
             
@@ -168,9 +176,9 @@
     
     
     <entry>
-      <title>categories</title>
-      <link href="/categories/index.html"/>
-      <url>/categories/index.html</url>
+      <title>comments</title>
+      <link href="/comments/index.html"/>
+      <url>/comments/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -179,9 +187,9 @@
     
     
     <entry>
-      <title>comments</title>
-      <link href="/comments/index.html"/>
-      <url>/comments/index.html</url>
+      <title>categories</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
