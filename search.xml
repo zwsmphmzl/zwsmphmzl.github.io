@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>本地管理员</title>
+      <link href="/posts/1959fd48.html"/>
+      <url>/posts/1959fd48.html</url>
+      
+        <content type="html"><![CDATA[<p>题目是本地管理员，打开网址，f12看一下源码，发现有一行是base64编码，使用<a href="https://cyberchef.org/">工具</a>进行解码</p><p><img src="https://cdn.jsdelivr.net/gh/zwsmphmzl/Image/202209081221054.png" alt="1662568664177"><br><img src="https://cdn.jsdelivr.net/gh/zwsmphmzl/Image/202209081237295.png" alt="1662568697378"></p><p>出来是test123，猜测是密码，用户猜测为admin，输入进去结果不行</p><p>使用<strong>bp</strong>抓包试一下，然后再重新发送，提示ip禁止访问，因为题目是本地管理员</p><p><img src="https://cdn.jsdelivr.net/gh/zwsmphmzl/Image/202209081237060.png" alt="1662568792342"></p><p>用<strong>xff伪装ip</strong>，然后发送</p><p><img src="https://cdn.jsdelivr.net/gh/zwsmphmzl/Image/202209081237093.png" alt="1662568871879"></p><p>成功，返回flag</p><p><img src="https://cdn.jsdelivr.net/gh/zwsmphmzl/Image/202209081237381.png" alt="1662568897270"></p><p>总结：xff伪装ip</p><p><u>X-Forwarded-For:</u> </p><p>写个博客都是bug，图片也不显示，不如本地，效率太低了，设置应该有问题（跪</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> WEB </category>
+          
+          <category> bugku </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> WEB </tag>
+            
+            <tag> wp </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>RC4解密</title>
+      <link href="/posts/0.html"/>
+      <url>/posts/0.html</url>
+      
+        <content type="html"><![CDATA[<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">rc4_main</span>(<span class="params">key = <span class="string">&quot;init_key&quot;</span>, message = <span class="string">&quot;init_message&quot;</span></span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;RC4解密主函数调用成功&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">    s_box = rc4_init_sbox(key)</span><br><span class="line">    crypt = rc4_excrypt(message, s_box)</span><br><span class="line">    <span class="keyword">return</span> crypt</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">rc4_init_sbox</span>(<span class="params">key</span>):</span><br><span class="line">    s_box = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">256</span>))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;原来的 s 盒：%s&quot;</span> % s_box)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">    j = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">256</span>):</span><br><span class="line">        j = (j + s_box[i] + <span class="built_in">ord</span>(key[i % <span class="built_in">len</span>(key)])) % <span class="number">256</span></span><br><span class="line">        s_box[i], s_box[j] = s_box[j], s_box[i]</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;混乱后的 s 盒：%s&quot;</span>% s_box)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> s_box</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">rc4_excrypt</span>(<span class="params">plain, box</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;调用解密程序成功。&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">    plain = base64.b64decode(plain.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line">    plain = <span class="built_in">bytes</span>.decode(plain)</span><br><span class="line">    res = []</span><br><span class="line">    i = j = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> plain:</span><br><span class="line">        i = (i + <span class="number">1</span>) % <span class="number">256</span></span><br><span class="line">        j = (j + box[i]) % <span class="number">256</span></span><br><span class="line">        box[i], box[j] = box[j], box[i]</span><br><span class="line">        t = (box[i] + box[j]) % <span class="number">256</span></span><br><span class="line">        k = box[t]</span><br><span class="line">        res.append(<span class="built_in">chr</span>(<span class="built_in">ord</span>(s) ^ k))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;res用于解密字符串，解密后是：%res&quot;</span> %res)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">    cipher = <span class="string">&quot;&quot;</span>.join(res)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;解密后的字符串是：%s&quot;</span> %cipher)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;解密后的输出(没经过任何编码):&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> cipher</span><br><span class="line">a=[<span class="number">0xC6</span>, <span class="number">0x21</span>, <span class="number">0xCA</span>, <span class="number">0xBF</span>, <span class="number">0x51</span>, <span class="number">0x43</span>, <span class="number">0x37</span>, <span class="number">0x31</span>, <span class="number">0x75</span>, <span class="number">0xE4</span>,</span><br><span class="line"><span class="number">0x8E</span>, <span class="number">0xC0</span>, <span class="number">0x54</span>, <span class="number">0x6F</span>, <span class="number">0x8F</span>, <span class="number">0xEE</span>, <span class="number">0xF8</span>, <span class="number">0x5A</span>, <span class="number">0xA2</span>, <span class="number">0xC1</span>,</span><br><span class="line"><span class="number">0xEB</span>, <span class="number">0xA5</span>, <span class="number">0x34</span>, <span class="number">0x6D</span>, <span class="number">0x71</span>, <span class="number">0x55</span>, <span class="number">0x08</span>, <span class="number">0x07</span>, <span class="number">0xB2</span>, <span class="number">0xA8</span>,</span><br><span class="line"><span class="number">0x2F</span>, <span class="number">0xF4</span>, <span class="number">0x51</span>, <span class="number">0x8E</span>, <span class="number">0x0C</span>, <span class="number">0xCC</span>, <span class="number">0x33</span>, <span class="number">0x53</span>, <span class="number">0x31</span>, <span class="number">0x00</span>,</span><br><span class="line"><span class="number">0x40</span>, <span class="number">0xD6</span>, <span class="number">0xCA</span>, <span class="number">0xEC</span>, <span class="number">0xD4</span>] <span class="comment">#cipher#这里16进制，r转换</span></span><br><span class="line">key=<span class="string">&quot;Nu1Lctf233&quot;</span><span class="comment">#这里</span></span><br><span class="line">s=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> a:</span><br><span class="line">    s+=<span class="built_in">chr</span>(i)</span><br><span class="line">s=<span class="built_in">str</span>(base64.b64encode(s.encode(<span class="string">&#x27;utf-8&#x27;</span>)), <span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">rc4_main(key, s)</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> CRYPTO </category>
+          
+          <category> 脚本爆破 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CRYPTO </tag>
+            
+            <tag> py脚本 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>SHA256解密</title>
+      <link href="/posts/ce390778.html"/>
+      <url>/posts/ce390778.html</url>
+      
+        <content type="html"><![CDATA[<h5 id="py代码"><a href="#py代码" class="headerlink" title="py代码"></a>py代码</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">8617090000000</span>,<span class="number">8617099999999</span>):</span><br><span class="line">        data=<span class="built_in">str</span>(data)</span><br><span class="line">        <span class="built_in">hash</span>=((hashlib.sha256(data.encode())).hexdigest())</span><br><span class="line"></span><br><span class="line">        R=<span class="string">&#x27;c22a563acc2a587afbfaaaa6d67bc6e628872b00bd7e998873881f7c6fdc62fc&#x27;</span></span><br><span class="line">        i = <span class="number">0</span></span><br><span class="line">        j = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span>(i&lt;<span class="number">64</span>):</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">hash</span>[i]==R[j]):</span><br><span class="line">                i=i+<span class="number">1</span></span><br><span class="line">                j=j+<span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span>(i==<span class="number">64</span>):</span><br><span class="line">                    <span class="built_in">print</span>(data)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> CRYPTO </category>
+          
+          <category> 脚本爆破 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CRYPTO </tag>
+            
+            <tag> py脚本 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>RSA脚本爆破</title>
+      <link href="/posts/0.html"/>
+      <url>/posts/0.html</url>
+      
+        <content type="html"><![CDATA[<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#RSA加密</span></span><br><span class="line"><span class="comment">#RSA加密是对消息进行模求幂，其指数为e，</span></span><br><span class="line"><span class="comment"># 模为N，通常是两个素数的乘积:N = p * q。指数和模一起形成RSA“公钥”(N, e)。</span></span><br><span class="line"><span class="comment"># e最常用的值是0x10001或65537。</span></span><br><span class="line"><span class="comment"># 使用指数e = 65537和素数p = 17和q = 23来“加密”数字12。你得到的密文是什么数字?</span></span><br><span class="line">e=<span class="number">65537</span><span class="comment">#指数</span></span><br><span class="line">p=<span class="number">17</span></span><br><span class="line">q=<span class="number">23</span></span><br><span class="line">N=p*q<span class="comment">#模</span></span><br><span class="line">m=<span class="number">12</span><span class="comment">#需加密信息</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">pow</span>(m,e,N))    <span class="comment">#c密文=pow(明文，指数，模)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#求欧拉函数phin</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">RSA依赖于模数N的分解难度，如果能找到质数，就可以计算出N的欧拉系数，从而对密文进行解密。</span></span><br><span class="line"><span class="string">给定N = p*q和两个素数:</span></span><br><span class="line"><span class="string">p = 857504083339712752489993810777</span></span><br><span class="line"><span class="string">q = 1029224947942998075080348647219</span></span><br><span class="line"><span class="string">N的欧拉函数是多少?</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line">p = <span class="number">857504083339712752489993810777</span></span><br><span class="line">q = <span class="number">1029224947942998075080348647219</span></span><br><span class="line">phin=(p-<span class="number">1</span>)*(q-<span class="number">1</span>)    <span class="comment">#(分解n的因数)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#求私匙</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">私钥d用于解密用相应的公钥创建的密文(它还用于“签名”消息，但我们稍后将讨论这个问题)。</span></span><br><span class="line"><span class="string">私钥是一种秘密信息或“活板门”，它可以让我们快速地转换加密功能。如果RSA实现得很好，如果你没有私钥最快的解密密文的方法是首先分解模数。</span></span><br><span class="line"><span class="string">在RSA中，私钥是指数e的模乘以N的权数的模乘逆。</span></span><br><span class="line"><span class="string">给定两个质数:</span></span><br><span class="line"><span class="string">p = 857504083339712752489993810777</span></span><br><span class="line"><span class="string">q = 1029224947942998075080348647219</span></span><br><span class="line"><span class="string">指数:e = 65537</span></span><br><span class="line"><span class="string">什么是私钥d?</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line">p = <span class="number">857504083339712752489993810777</span></span><br><span class="line">q = <span class="number">1029224947942998075080348647219</span></span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">N=p*q <span class="comment">#指数e的模</span></span><br><span class="line">phin=(p-<span class="number">1</span>)*(q-<span class="number">1</span>)</span><br><span class="line">d=<span class="built_in">pow</span>(e,-<span class="number">1</span>,phin)   <span class="comment">#d私匙=pow(指数，-1，欧拉函数)</span></span><br><span class="line"><span class="built_in">print</span>(d)</span><br><span class="line"></span><br><span class="line"><span class="comment">#RSA解密</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">我只使用你的公钥参数为你的眼睛加密了一个秘密数字:</span></span><br><span class="line"><span class="string">N = 882564595536224140639625987659416029426239230804614613279163</span></span><br><span class="line"><span class="string">e = 65537</span></span><br><span class="line"><span class="string">使用您在前面的挑战中找到的这些参数的私钥来解密这个密文:</span></span><br><span class="line"><span class="string">c = 77578995801157823671636298847186723593814843845525223303932</span></span><br><span class="line"><span class="string">m≡ c^d mod N</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line">N = <span class="number">882564595536224140639625987659416029426239230804614613279163</span></span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">ct = <span class="number">77578995801157823671636298847186723593814843845525223303932</span></span><br><span class="line"><span class="comment">#n是合数利用yafu分解N</span></span><br><span class="line">p=<span class="number">857504083339712752489993810777</span></span><br><span class="line">q=<span class="number">1029224947942998075080348647219</span></span><br><span class="line">phin=(p-<span class="number">1</span>)*(q-<span class="number">1</span>)</span><br><span class="line">d=<span class="built_in">pow</span>(e,-<span class="number">1</span>,phin)   <span class="comment">#d私匙=pow(指数，-1，欧拉函数)</span></span><br><span class="line">m=<span class="built_in">pow</span>(ct,d,N)       <span class="comment">#m明文=(密文，密匙，模)</span></span><br><span class="line"><span class="built_in">print</span>(m)</span><br><span class="line"></span><br><span class="line"><span class="comment">#n是素数解密</span></span><br><span class="line">phin=(n-<span class="number">1</span>)</span><br><span class="line"><span class="comment">#eg：</span></span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> getPrime, inverse, bytes_to_long, long_to_bytes, GCD</span><br><span class="line">n = <span class="number">171731371218065444125482536302245915415603318380280392385291836472299752747934607246477508507827284075763910264995326010251268493630501989810855418416643352631102434317900028697993224868629935657273062472544675693365930943308086634291936846505861203914449338007760990051788980485462592823446469606824421932591</span></span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">ct = <span class="number">161367550346730604451454756189028938964941280347662098798775466019463375610700074840105776873791605070092554650190486030367121011578171525759600774739890458414593857709994072516290998135846956596662071379067305011746842247628316996977338024343628757374524136260758515864509435302781735938531030576289086798942</span></span><br><span class="line">phin=n-<span class="number">1</span></span><br><span class="line">d=<span class="built_in">pow</span>(e,-<span class="number">1</span>,phin)</span><br><span class="line">m=<span class="built_in">pow</span>(ct,d,n)</span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(m))</span><br><span class="line"></span><br><span class="line"><span class="comment">#n=p^2</span></span><br><span class="line"><span class="comment">#eg:</span></span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> getPrime, inverse, bytes_to_long, long_to_bytes, GCD</span><br><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> iroot</span><br><span class="line">n = <span class="number">535860808044009550029177135708168016201451343147313565371014459027743491739422885443084705720731409713775527993719682583669164873806842043288439828071789970694759080842162253955259590552283047728782812946845160334801782088068154453021936721710269050985805054692096738777321796153384024897615594493453068138341203673749514094546000253631902991617197847584519694152122765406982133526594928685232381934742152195861380221224370858128736975959176861651044370378539093990198336298572944512738570839396588590096813217791191895941380464803377602779240663133834952329316862399581950590588006371221334128215409197603236942597674756728212232134056562716399155080108881105952768189193728827484667349378091100068224404684701674782399200373192433062767622841264055426035349769018117299620554803902490432339600566432246795818167460916180647394169157647245603555692735630862148715428791242764799469896924753470539857080767170052783918273180304835318388177089674231640910337743789750979216202573226794240332797892868276309400253925932223895530714169648116569013581643192341931800785254715083294526325980247219218364118877864892068185905587410977152737936310734712276956663192182487672474651103240004173381041237906849437490609652395748868434296753449</span></span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">c = <span class="number">222502885974182429500948389840563415291534726891354573907329512556439632810921927905220486727807436668035929302442754225952786602492250448020341217733646472982286222338860566076161977786095675944552232391481278782019346283900959677167026636830252067048759720251671811058647569724495547940966885025629807079171218371644528053562232396674283745310132242492367274184667845174514466834132589971388067076980563188513333661165819462428837210575342101036356974189393390097403614434491507672459254969638032776897417674577487775755539964915035731988499983726435005007850876000232292458554577437739427313453671492956668188219600633325930981748162455965093222648173134777571527681591366164711307355510889316052064146089646772869610726671696699221157985834325663661400034831442431209123478778078255846830522226390964119818784903330200488705212765569163495571851459355520398928214206285080883954881888668509262455490889283862560453598662919522224935145694435885396500780651530829377030371611921181207362217397805303962112100190783763061909945889717878397740711340114311597934724670601992737526668932871436226135393872881664511222789565256059138002651403875484920711316522536260604255269532161594824301047729082877262812899724246757871448545439896</span></span><br><span class="line">p=iroot(n,<span class="number">2</span>)[<span class="number">0</span>] <span class="comment">#开根</span></span><br><span class="line"><span class="built_in">print</span>(p)</span><br><span class="line"><span class="comment"># n=p^a*q^b*r^c =&gt; phin=p^&#123;a-1&#125;*(p-1)*q^&#123;b-1&#125;*(q-1)</span></span><br><span class="line">phin=p*(p-<span class="number">1</span>) <span class="comment">#根据欧拉公式</span></span><br><span class="line">d=<span class="built_in">pow</span>(e,-<span class="number">1</span>,phin)</span><br><span class="line">m=<span class="built_in">pow</span>(c,d,n)</span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(m))</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>根据需求修改脚本</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> CRYPTO </category>
+          
+          <category> 脚本爆破 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CRYPTO </tag>
+            
+            <tag> py脚本 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>棋盘爆破</title>
+      <link href="/posts/0.html"/>
+      <url>/posts/0.html</url>
+      
+        <content type="html"><![CDATA[<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line"></span><br><span class="line">key = []</span><br><span class="line">cipher = <span class="string">&quot;ilnllliiikkninlekile&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> itertools.permutations(<span class="string">&#x27;ilnke&#x27;</span>, <span class="number">5</span>):</span><br><span class="line">    key.append(<span class="string">&#x27;&#x27;</span>.join(i))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> now_key <span class="keyword">in</span> key:</span><br><span class="line">    solve_c = <span class="string">&quot;&quot;</span></span><br><span class="line">    res = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">for</span> now_c <span class="keyword">in</span> cipher:</span><br><span class="line">        solve_c += <span class="built_in">str</span>(now_key.index(now_c))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(solve_c),<span class="number">2</span>):</span><br><span class="line">        now_ascii = <span class="built_in">int</span>(solve_c[i])*<span class="number">5</span>+<span class="built_in">int</span>(solve_c[i+<span class="number">1</span>])+<span class="number">97</span></span><br><span class="line">        <span class="keyword">if</span> now_ascii&gt;<span class="built_in">ord</span>(<span class="string">&#x27;i&#x27;</span>):</span><br><span class="line">            now_ascii+=<span class="number">1</span></span><br><span class="line">        res += <span class="built_in">chr</span>(now_ascii)</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;flag&quot;</span> <span class="keyword">in</span> res:</span><br><span class="line">        <span class="built_in">print</span> (now_key,res)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> CRYPTO </category>
+          
+          <category> 脚本爆破 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CRYPTO </tag>
+            
+            <tag> py脚本 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hello Debu</title>
+      <link href="/posts/59354.html"/>
+      <url>/posts/59354.html</url>
+      
+        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
+    
+    
+    <entry>
+      <title>about</title>
+      <link href="/about/index.html"/>
+      <url>/about/index.html</url>
+      
+        <content type="html"><![CDATA[<p>目前是大二学生</p><p>开始入门<strong>WEB</strong>,<strong>MISC</strong><del>狗都不学</del> </p>]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>categories</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>comments</title>
+      <link href="/comments/index.html"/>
+      <url>/comments/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>link</title>
+      <link href="/link/index.html"/>
+      <url>/link/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>tags</title>
+      <link href="/tags/index.html"/>
+      <url>/tags/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+  
+</search>
